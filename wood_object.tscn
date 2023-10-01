@@ -1,0 +1,22 @@
+[gd_scene load_steps=4 format=3 uid="uid://dvmpvsw3h2h81"]
+
+[ext_resource type="Texture2D" uid="uid://cyuecjym8bfwp" path="res://spritesheet_wood.png" id="1_aunav"]
+
+[sub_resource type="PhysicsMaterial" id="PhysicsMaterial_oevpf"]
+bounce = 0.1
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_l28ee"]
+size = Vector2(34, 34)
+
+[node name="WoodObject" type="RigidBody2D"]
+mass = 0.15
+physics_material_override = SubResource("PhysicsMaterial_oevpf")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_l28ee")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+scale = Vector2(0.25, 0.25)
+texture = ExtResource("1_aunav")
+region_enabled = true
+region_rect = Rect2(360, 360, 140, 140)

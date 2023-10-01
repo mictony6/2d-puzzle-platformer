@@ -1,0 +1,73 @@
+[gd_scene load_steps=4 format=3 uid="uid://c8j2jwkvd3jcy"]
+
+[ext_resource type="PackedScene" uid="uid://b8bkj7bwnjuwx" path="res://Block.tscn" id="1_dtamu"]
+[ext_resource type="PackedScene" uid="uid://b3ctias3ulfh4" path="res://Player.tscn" id="2_l56so"]
+[ext_resource type="PackedScene" uid="uid://dvmpvsw3h2h81" path="res://wood_object.tscn" id="3_4qj3e"]
+
+[node name="World" type="Node2D"]
+
+[node name="Map" type="Node2D" parent="."]
+
+[node name="Block" parent="Map" instance=ExtResource("1_dtamu")]
+position = Vector2(45, 81)
+
+[node name="Block2" parent="Map" instance=ExtResource("1_dtamu")]
+position = Vector2(63, 81)
+
+[node name="Block5" parent="Map" instance=ExtResource("1_dtamu")]
+position = Vector2(9, 81)
+
+[node name="Block6" parent="Map" instance=ExtResource("1_dtamu")]
+position = Vector2(27, 81)
+
+[node name="Block7" parent="Map" instance=ExtResource("1_dtamu")]
+position = Vector2(-27, 81)
+
+[node name="Block8" parent="Map" instance=ExtResource("1_dtamu")]
+position = Vector2(-9, 81)
+
+[node name="Block9" parent="Map" instance=ExtResource("1_dtamu")]
+position = Vector2(-63, 81)
+
+[node name="Block10" parent="Map" instance=ExtResource("1_dtamu")]
+position = Vector2(-45, 81)
+
+[node name="Block16" parent="Map" instance=ExtResource("1_dtamu")]
+position = Vector2(-81, 81)
+
+[node name="Block17" parent="Map" instance=ExtResource("1_dtamu")]
+position = Vector2(-81, 45)
+
+[node name="Block18" parent="Map" instance=ExtResource("1_dtamu")]
+position = Vector2(-81, 63)
+
+[node name="Block3" parent="Map" instance=ExtResource("1_dtamu")]
+position = Vector2(99, 63)
+
+[node name="Block11" parent="Map" instance=ExtResource("1_dtamu")]
+position = Vector2(-9, 63)
+
+[node name="Block12" parent="Map" instance=ExtResource("1_dtamu")]
+position = Vector2(9, 63)
+
+[node name="Block13" parent="Map" instance=ExtResource("1_dtamu")]
+position = Vector2(9, 45)
+
+[node name="Block15" parent="Map" instance=ExtResource("1_dtamu")]
+position = Vector2(27, 45)
+
+[node name="Block14" parent="Map" instance=ExtResource("1_dtamu")]
+position = Vector2(27, 63)
+
+[node name="Block4" parent="Map" instance=ExtResource("1_dtamu")]
+position = Vector2(81, 63)
+
+[node name="Player" parent="." instance=ExtResource("2_l56so")]
+
+[node name="Camera2D" type="Camera2D" parent="Player"]
+zoom = Vector2(4, 4)
+position_smoothing_enabled = true
+position_smoothing_speed = 2.0
+
+[node name="WoodObject" parent="." instance=ExtResource("3_4qj3e")]
+position = Vector2(-15, -30)

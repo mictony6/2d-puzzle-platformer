@@ -1,0 +1,73 @@
+[gd_scene load_steps=11 format=3 uid="uid://b3ctias3ulfh4"]
+
+[ext_resource type="Script" path="res://Player.gd" id="1_cjqi6"]
+[ext_resource type="Texture2D" uid="uid://h84uv7btixb0" path="res://characters_packed.png" id="1_cndnb"]
+[ext_resource type="Script" path="res://CharacterStateMachine.gd" id="3_gdrbn"]
+[ext_resource type="Script" path="res://GroundState.gd" id="4_2rdhu"]
+[ext_resource type="Script" path="res://AirState.gd" id="5_oth0i"]
+[ext_resource type="Script" path="res://LandingState.gd" id="6_10o4v"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_pbpio"]
+atlas = ExtResource("1_cndnb")
+region = Rect2(0, 0, 24, 24)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_cnln6"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_pbpio")
+}],
+"loop": true,
+"name": &"Idle",
+"speed": 5.0
+}]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_6timk"]
+radius = 7.0
+height = 18.0
+
+[sub_resource type="LabelSettings" id="LabelSettings_hurum"]
+font_size = 10
+
+[node name="Player" type="CharacterBody2D"]
+script = ExtResource("1_cjqi6")
+
+[node name="texture" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_cnln6")
+animation = &"Idle"
+flip_h = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, 3)
+shape = SubResource("CapsuleShape2D_6timk")
+
+[node name="CharacterStateMachine" type="Node" parent="." node_paths=PackedStringArray("character", "label", "current_state")]
+script = ExtResource("3_gdrbn")
+character = NodePath("..")
+label = NodePath("../Label")
+current_state = NodePath("Air")
+
+[node name="Ground" type="Node" parent="CharacterStateMachine" node_paths=PackedStringArray("air_state")]
+script = ExtResource("4_2rdhu")
+air_state = NodePath("../Air")
+
+[node name="Air" type="Node" parent="CharacterStateMachine" node_paths=PackedStringArray("ground_state")]
+script = ExtResource("5_oth0i")
+ground_state = NodePath("../Ground")
+can_move = false
+
+[node name="Landing" type="Node" parent="CharacterStateMachine"]
+script = ExtResource("6_10o4v")
+can_move = false
+
+[node name="Label" type="Label" parent="."]
+texture_filter = 1
+offset_left = -20.0
+offset_top = -27.0
+offset_right = 20.0
+offset_bottom = -4.0
+text = "Ground"
+label_settings = SubResource("LabelSettings_hurum")
+horizontal_alignment = 1
+vertical_alignment = 1
+autowrap_mode = 1
