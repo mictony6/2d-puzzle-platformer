@@ -1,17 +1,20 @@
-[gd_scene load_steps=7 format=3 uid="uid://c80jvqpacf3h3"]
+[gd_scene load_steps=8 format=3 uid="uid://c80jvqpacf3h3"]
 
 [ext_resource type="Script" path="res://scripts/launcher.gd" id="1_s4vae"]
 [ext_resource type="Texture2D" uid="uid://cwvp7hxolbtme" path="res://assets/spritesheets/blocks/spritesheet_stone.png" id="2_6a3v7"]
 
+[sub_resource type="PhysicsMaterial" id="PhysicsMaterial_xd2jt"]
+friction = 0.5
+
 [sub_resource type="CircleShape2D" id="CircleShape2D_tnhb3"]
-radius = 16.0312
+radius = 15.0333
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_va7ga"]
 size = Vector2(34, 54)
 
 [sub_resource type="Animation" id="Animation_23tif"]
 resource_name = "pull_back"
-length = 2.0
+length = 4.0
 loop_mode = 1
 tracks/0/type = "value"
 tracks/0/imported = false
@@ -20,10 +23,10 @@ tracks/0/path = NodePath("CharacterBody2D/CollisionShape2D:position")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.1, 1.3, 1.9),
-"transitions": PackedFloat32Array(1, 1, 2, 2),
+"times": PackedFloat32Array(0, 0.1, 0.3, 3.8, 3.9),
+"transitions": PackedFloat32Array(1, 1, 2, 1, 1),
 "update": 0,
-"values": [Vector2(0, -1), Vector2(0, -1), Vector2(0, 27), Vector2(0, 27)]
+"values": [Vector2(0, -1), Vector2(0, -1), Vector2(0, 27), Vector2(0, 27), Vector2(0, 32)]
 }
 tracks/1/type = "value"
 tracks/1/imported = false
@@ -32,10 +35,10 @@ tracks/1/path = NodePath("CharacterBody2D/Sprite2D:position")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
-"times": PackedFloat32Array(0, 0.1, 1.3, 1.9),
-"transitions": PackedFloat32Array(1, 1, 2, 2),
+"times": PackedFloat32Array(0, 0.1, 0.3, 3.8, 3.9),
+"transitions": PackedFloat32Array(1, 1, 2, 1, 1),
 "update": 0,
-"values": [Vector2(0, 0), Vector2(0, 0), Vector2(0, 27.375), Vector2(0, 27.375)]
+"values": [Vector2(0, 0), Vector2(0, 0), Vector2(0, 27.375), Vector2(0, 27.375), Vector2(0, 32.375)]
 }
 tracks/2/type = "method"
 tracks/2/imported = false
@@ -44,14 +47,17 @@ tracks/2/path = NodePath("CharacterBody2D")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/keys = {
-"times": PackedFloat32Array(0, 0.2),
-"transitions": PackedFloat32Array(1, 1),
+"times": PackedFloat32Array(0, 0.2, 3.95),
+"transitions": PackedFloat32Array(1, 1, 1),
 "values": [{
 "args": [],
 "method": &"up"
 }, {
 "args": [],
 "method": &"down"
+}, {
+"args": [],
+"method": &"up"
 }]
 }
 
@@ -60,15 +66,16 @@ _data = {
 "pull_back": SubResource("Animation_23tif")
 }
 
-[node name="box_launcher" type="Node2D"]
+[node name="Launcher" type="Node2D"]
 z_index = -1
 z_as_relative = false
 
 [node name="CharacterBody2D" type="StaticBody2D" parent="."]
+physics_material_override = SubResource("PhysicsMaterial_xd2jt")
 script = ExtResource("1_s4vae")
 
 [node name="Sprite2D" type="Sprite2D" parent="CharacterBody2D"]
-position = Vector2(0, 6.76171)
+position = Vector2(0, 16.1875)
 scale = Vector2(0.25, 0.25)
 texture = ExtResource("2_6a3v7")
 region_enabled = true
@@ -83,7 +90,7 @@ position = Vector2(0, 9.625)
 shape = SubResource("CircleShape2D_tnhb3")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="CharacterBody2D"]
-position = Vector2(0, 5.91608)
+position = Vector2(0, 15.5)
 shape = SubResource("RectangleShape2D_va7ga")
 
 [node name="launcher_animationplayer" type="AnimationPlayer" parent="CharacterBody2D"]

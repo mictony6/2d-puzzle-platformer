@@ -1,6 +1,7 @@
 extends State
 class_name GlidingState
-const GLIDING_SPEED = 100
+var GLIDING_SPEED_X = 100
+var GLIDING_SPEED_Y = 50
 	
 func state_input(event: InputEvent):
 	
@@ -9,7 +10,7 @@ func state_input(event: InputEvent):
 
 
 func on_enter():
-	
+	character.launched = false
 	tree.get("parameters/playback").travel("Glide")
 
 
@@ -21,5 +22,5 @@ func update(delta):
 	if character.direction:
 		tree.set("parameters/Glide/blend_position", character.direction)
 	
-	character.velocity.y =  GLIDING_SPEED*0.5 
-	character.velocity.x = clampf(character.velocity.x, -GLIDING_SPEED, GLIDING_SPEED)
+	character.velocity.y =  GLIDING_SPEED_Y
+	character.velocity.x = clampf(character.velocity.x, -GLIDING_SPEED_X, GLIDING_SPEED_X)

@@ -5,6 +5,7 @@ var local_jump_velocity : int = 0
 
 
 func on_enter():
+	character.launched = false
 	walk()
 	if (Input.is_action_pressed("sprint")):
 		sprint()

@@ -11,3 +11,4 @@ func push(impulse:Vector2):
 	
 func launch(launch_details):
 	apply_central_impulse(launch_details.force * launch_details.direction * launch_multiplier)  # Apply impulse at collision point
+

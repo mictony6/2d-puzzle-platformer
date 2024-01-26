@@ -17,12 +17,16 @@ func on_enter():
 		jump_x = character.SPEED*1.2*character.direction
 	else:
 		jump_x =character.SPEED*character.direction
+	if character.launched:
+		jump_x = character.velocity.x
+		sprint_jump = true
 		
 func update(delta):
 	if glide_checker.enabled:
 		can_glide = !glide_checker.is_colliding()
 	if character.direction:
 		tree.set("parameters/Air/blend_position", character.direction)
+	
 	if sprint_jump:
 		jump_x =lerpf(jump_x, 0, 0.005)
 	else:
@@ -35,8 +39,8 @@ func update(delta):
 		character.velocity.y += character.gravity * delta
 	
 	if character.velocity.y >= 320 :
-		transition_to.emit("Landing")
-		return
+			transition_to.emit("Landing")
+			return
 		
 func on_exit():
 	character.coyote_time = 0

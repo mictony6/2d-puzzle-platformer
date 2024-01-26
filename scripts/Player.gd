@@ -19,6 +19,8 @@ var default_position : Vector2
 #coyote time
 var coyote_time = 0.1
 
+var launched : bool = false
+
 #sprint
 var is_sprinting : bool = false
 
@@ -68,9 +70,10 @@ func jump():
 	state_machine.current_state.transition_to.emit("Air")
 	
 func get_launched(launch_direction : Vector2):
-	state_machine.current_state.transition_to.emit("Air")
+	launched = true
 	velocity.x = 250*3*launch_direction.x	
 	velocity.y = 250*3*launch_direction.y
-	
+	direction = launch_direction.x
+	state_machine.current_state.transition_to.emit("Air")
 	
 	

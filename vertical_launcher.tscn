@@ -1,0 +1,49 @@
+[gd_scene load_steps=5 format=3 uid="uid://b8rqnjbc5x72s"]
+
+[ext_resource type="PackedScene" uid="uid://c80jvqpacf3h3" path="res://launcher.tscn" id="1_hqe8a"]
+[ext_resource type="Texture2D" uid="uid://cwvp7hxolbtme" path="res://assets/spritesheets/blocks/spritesheet_stone.png" id="2_6a3v7"]
+[ext_resource type="Script" path="res://scripts/vertical_launcher.gd" id="2_gd5vl"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_dow23"]
+size = Vector2(18, 111)
+
+[node name="VerticalLauncher" instance=ExtResource("1_hqe8a")]
+
+[node name="CharacterBody2D" parent="." index="0"]
+script = ExtResource("2_gd5vl")
+
+[node name="Sprite2D2" type="Sprite2D" parent="CharacterBody2D" index="3"]
+position = Vector2(-29.25, 17.625)
+scale = Vector2(0.25, 0.25)
+texture = ExtResource("2_6a3v7")
+region_enabled = true
+region_rect = Rect2(640, -1, 70, 221)
+
+[node name="Sprite2D3" type="Sprite2D" parent="CharacterBody2D" index="4"]
+position = Vector2(29.75, 17.625)
+scale = Vector2(0.25, 0.25)
+texture = ExtResource("2_6a3v7")
+region_enabled = true
+region_rect = Rect2(640, -1, 70, 221)
+
+[node name="Sprite2D4" type="Sprite2D" parent="CharacterBody2D" index="5"]
+position = Vector2(-29.25, 72.625)
+scale = Vector2(0.25, 0.25)
+texture = ExtResource("2_6a3v7")
+region_enabled = true
+region_rect = Rect2(640, -1, 70, 221)
+
+[node name="Sprite2D5" type="Sprite2D" parent="CharacterBody2D" index="6"]
+position = Vector2(29.75, 72.625)
+scale = Vector2(0.25, 0.25)
+texture = ExtResource("2_6a3v7")
+region_enabled = true
+region_rect = Rect2(640, -1, 70, 221)
+
+[node name="CollisionShape2D3" type="CollisionShape2D" parent="CharacterBody2D" index="7"]
+position = Vector2(29.75, 45.5)
+shape = SubResource("RectangleShape2D_dow23")
+
+[node name="CollisionShape2D4" type="CollisionShape2D" parent="CharacterBody2D" index="8"]
+position = Vector2(-29.25, 45.5)
+shape = SubResource("RectangleShape2D_dow23")

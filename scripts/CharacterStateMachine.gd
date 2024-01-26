@@ -63,4 +63,5 @@ func check_push(delta):
 				var normal = -collision.get_normal()
 				if (normal.y <= 0.1):
 					collider.push(normal.normalized() * 10000 * delta)
+					
 
