@@ -1,0 +1,90 @@
+[gd_scene load_steps=7 format=3 uid="uid://c80jvqpacf3h3"]
+
+[ext_resource type="Script" path="res://launcher.gd" id="1_8ekr5"]
+[ext_resource type="Texture2D" uid="uid://cyuecjym8bfwp" path="res://spritesheet_wood.png" id="1_dvmua"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_wmt6g"]
+size = Vector2(34, 5.62428)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_va7ga"]
+size = Vector2(34, 27.5)
+
+[sub_resource type="Animation" id="Animation_23tif"]
+resource_name = "pull_back"
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("CharacterBody2D/CollisionShape2D:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.9),
+"transitions": PackedFloat32Array(1, 1, 2),
+"update": 0,
+"values": [Vector2(0, -13.25), Vector2(0, -13.25), Vector2(0, 14.125)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("CharacterBody2D/Sprite2D:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.9),
+"transitions": PackedFloat32Array(1, 1, 2),
+"update": 0,
+"values": [Vector2(0, 0), Vector2(0, 0), Vector2(0, 27.375)]
+}
+tracks/2/type = "method"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("CharacterBody2D")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0.05, 0.95),
+"transitions": PackedFloat32Array(1, 1),
+"values": [{
+"args": [],
+"method": &"down"
+}, {
+"args": [],
+"method": &"up"
+}]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_ek315"]
+_data = {
+"pull_back": SubResource("Animation_23tif")
+}
+
+[node name="box_launcher" type="Node2D"]
+
+[node name="CharacterBody2D" type="StaticBody2D" parent="."]
+script = ExtResource("1_8ekr5")
+
+[node name="Sprite2D" type="Sprite2D" parent="CharacterBody2D"]
+scale = Vector2(0.25, 0.25)
+texture = ExtResource("1_dvmua")
+region_enabled = true
+region_rect = Rect2(500, 351, 140, 219)
+
+[node name="Area2D" type="Area2D" parent="CharacterBody2D/Sprite2D"]
+position = Vector2(0, -140)
+scale = Vector2(4, 4)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="CharacterBody2D/Sprite2D/Area2D"]
+position = Vector2(0, 6.81214)
+shape = SubResource("RectangleShape2D_wmt6g")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="CharacterBody2D"]
+position = Vector2(0, -13.25)
+shape = SubResource("RectangleShape2D_va7ga")
+
+[node name="launcher_animationplayer" type="AnimationPlayer" parent="CharacterBody2D"]
+root_node = NodePath("../..")
+libraries = {
+"": SubResource("AnimationLibrary_ek315")
+}
+autoplay = "pull_back"

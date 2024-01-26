@@ -1,5 +1,5 @@
-extends State
-class_name LandingState
+extends Block
+class_name WoodenBlock
 
 
 # Called when the node enters the scene tree for the first time.

@@ -1,0 +1,14 @@
+[gd_scene load_steps=4 format=3 uid="uid://chhdmtm5h44rx"]
+
+[ext_resource type="PackedScene" uid="uid://dvmpvsw3h2h81" path="res://block.tscn" id="1_fgru4"]
+[ext_resource type="Script" path="res://scripts/WoodenBlock.gd" id="2_rt05l"]
+
+[sub_resource type="PhysicsMaterial" id="PhysicsMaterial_xlsc7"]
+friction = 0.5
+rough = true
+bounce = 0.2
+
+[node name="WoodenBlock" instance=ExtResource("1_fgru4")]
+mass = 8.0
+physics_material_override = SubResource("PhysicsMaterial_xlsc7")
+script = ExtResource("2_rt05l")

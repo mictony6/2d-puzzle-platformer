@@ -1,16 +1,22 @@
-[gd_scene load_steps=3 format=3 uid="uid://b8bkj7bwnjuwx"]
+[gd_scene load_steps=5 format=3 uid="uid://dvmpvsw3h2h81"]
 
-[ext_resource type="Texture2D" uid="uid://cwq3xote7fflj" path="res://tiles_packed.png" id="1_nrkhe"]
+[ext_resource type="PhysicsMaterial" uid="uid://cpq5xdu3u3gb8" path="res://wood_object_psx.tres" id="1_a2r37"]
+[ext_resource type="Script" path="res://scripts/Block.gd" id="2_n87yd"]
+[ext_resource type="Texture2D" uid="uid://cyuecjym8bfwp" path="res://assets/spritesheets/blocks/spritesheet_wood.png" id="3_ymxws"]
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_vmbpo"]
-size = Vector2(18, 18)
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_l28ee"]
+size = Vector2(34, 34)
 
-[node name="Block" type="StaticBody2D"]
+[node name="Block" type="RigidBody2D" groups=["Box"]]
+mass = 10.0
+physics_material_override = ExtResource("1_a2r37")
+script = ExtResource("2_n87yd")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-shape = SubResource("RectangleShape2D_vmbpo")
+shape = SubResource("RectangleShape2D_l28ee")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
-texture = ExtResource("1_nrkhe")
+scale = Vector2(0.25, 0.25)
+texture = ExtResource("3_ymxws")
 region_enabled = true
-region_rect = Rect2(126, 36, 18, 18)
+region_rect = Rect2(360, 360, 140, 140)

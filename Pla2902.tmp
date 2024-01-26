@@ -1,14 +1,12 @@
-[gd_scene load_steps=71 format=3 uid="uid://b3ctias3ulfh4"]
+[gd_scene load_steps=64 format=3 uid="uid://b3ctias3ulfh4"]
 
+[ext_resource type="Script" path="res://Player.gd" id="1_cjqi6"]
 [ext_resource type="Texture2D" uid="uid://h84uv7btixb0" path="res://characters_packed.png" id="1_cndnb"]
-[ext_resource type="Script" path="res://scripts/Player.gd" id="1_v3nlr"]
-[ext_resource type="Script" path="res://scripts/CharacterStateMachine.gd" id="3_lx4st"]
-[ext_resource type="Script" path="res://scripts/GroundState.gd" id="4_mjau3"]
-[ext_resource type="Script" path="res://scripts/AirState.gd" id="5_7rymb"]
-[ext_resource type="Script" path="res://scripts/LandingState.gd" id="6_t0alr"]
-[ext_resource type="Script" path="res://scripts/GlidingState.gd" id="7_3jy5b"]
-[ext_resource type="Script" path="res://scripts/AbilityState.gd" id="8_to81o"]
-[ext_resource type="Texture2D" uid="uid://cwq3xote7fflj" path="res://tiles_packed.png" id="9_qlsvu"]
+[ext_resource type="Script" path="res://CharacterStateMachine.gd" id="3_gdrbn"]
+[ext_resource type="Script" path="res://GroundState.gd" id="4_2rdhu"]
+[ext_resource type="Script" path="res://AirState.gd" id="5_oth0i"]
+[ext_resource type="Script" path="res://LandingState.gd" id="6_10o4v"]
+[ext_resource type="Script" path="res://GlidingState.gd" id="7_3grmf"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_6rsjt"]
 atlas = ExtResource("1_cndnb")
@@ -315,7 +313,6 @@ tracks/0/keys = {
 
 [sub_resource type="Animation" id="Animation_tvx53"]
 resource_name = "jump_left"
-loop_mode = 1
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
@@ -589,8 +586,6 @@ _data = {
 "walk_right": SubResource("Animation_nwx66")
 }
 
-[sub_resource type="AnimationNodeBlendSpace2D" id="AnimationNodeBlendSpace2D_mcq8n"]
-
 [sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_rwm6x"]
 animation = &"jump_left"
 
@@ -627,9 +622,9 @@ animation = &"idle"
 
 [sub_resource type="AnimationNodeBlendSpace1D" id="AnimationNodeBlendSpace1D_abq4b"]
 blend_point_0/node = SubResource("AnimationNodeAnimation_hf6vh")
-blend_point_0/pos = 0.2
+blend_point_0/pos = 1.0
 blend_point_1/node = SubResource("AnimationNodeAnimation_4go8a")
-blend_point_1/pos = -0.2
+blend_point_1/pos = -1.0
 blend_point_2/node = SubResource("AnimationNodeAnimation_u00i1")
 blend_point_2/pos = 0.0
 blend_mode = 1
@@ -659,12 +654,6 @@ animation = &"idle"
 [sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_s4df0"]
 animation = &"run_left"
 
-[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_gft2c"]
-animation = &"walk_left"
-
-[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_tfupc"]
-animation = &"walk_right"
-
 [sub_resource type="AnimationNodeBlendSpace1D" id="AnimationNodeBlendSpace1D_32ci7"]
 blend_point_0/node = SubResource("AnimationNodeAnimation_opr4c")
 blend_point_0/pos = 1.0
@@ -672,10 +661,6 @@ blend_point_1/node = SubResource("AnimationNodeAnimation_dgdqo")
 blend_point_1/pos = 0.0
 blend_point_2/node = SubResource("AnimationNodeAnimation_s4df0")
 blend_point_2/pos = -1.0
-blend_point_3/node = SubResource("AnimationNodeAnimation_gft2c")
-blend_point_3/pos = -0.2
-blend_point_4/node = SubResource("AnimationNodeAnimation_tfupc")
-blend_point_4/pos = 0.2
 blend_mode = 1
 
 [sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_sjwp8"]
@@ -714,8 +699,6 @@ switch_mode = 1
 switch_mode = 1
 
 [sub_resource type="AnimationNodeStateMachine" id="AnimationNodeStateMachine_eedct"]
-states/Ability/node = SubResource("AnimationNodeBlendSpace2D_mcq8n")
-states/Ability/position = Vector2(1002, -27.564)
 states/Air/node = SubResource("AnimationNodeBlendSpace1D_dotis")
 states/Air/position = Vector2(632, -124.999)
 states/End/position = Vector2(942, 146)
@@ -731,25 +714,10 @@ states/Sprinting/node = SubResource("AnimationNodeBlendSpace1D_32ci7")
 states/Sprinting/position = Vector2(968, 48.7102)
 states/Start/position = Vector2(448, 100)
 transitions = ["Start", "Ground", SubResource("AnimationNodeStateMachineTransition_sjwp8"), "Land", "Ground", SubResource("AnimationNodeStateMachineTransition_6ssbd"), "Ground", "Land", SubResource("AnimationNodeStateMachineTransition_a8u0u"), "Ground", "Glide", SubResource("AnimationNodeStateMachineTransition_xicjk"), "Land", "Glide", SubResource("AnimationNodeStateMachineTransition_ftpks"), "Remove", "Land", SubResource("AnimationNodeStateMachineTransition_bvhjj"), "Remove", "Ground", SubResource("AnimationNodeStateMachineTransition_l07qi"), "Glide", "Remove", SubResource("AnimationNodeStateMachineTransition_nc5ns"), "Remove", "Air", SubResource("AnimationNodeStateMachineTransition_dkfau"), "Air", "Glide", SubResource("AnimationNodeStateMachineTransition_h7gxb"), "Air", "Land", SubResource("AnimationNodeStateMachineTransition_pa6nx"), "Ground", "Sprinting", SubResource("AnimationNodeStateMachineTransition_1nui3"), "Sprinting", "Ground", SubResource("AnimationNodeStateMachineTransition_pto5i")]
-graph_offset = Vector2(69, -144.564)
-
-[sub_resource type="CircleShape2D" id="CircleShape2D_k5126"]
-radius = 48.6102
-
-[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_jkd5c"]
-lifetime_randomness = 0.25
-particle_flag_disable_z = true
-emission_shape = 2
-emission_sphere_radius = 40.0
-inherit_velocity_ratio = 0.25
-orbit_velocity_min = -0.25
-orbit_velocity_max = 0.25
-radial_velocity_min = -10.0
-radial_velocity_max = 10.0
-scale_max = 2.0
+graph_offset = Vector2(69, -209.252)
 
 [node name="Player" type="CharacterBody2D"]
-script = ExtResource("1_v3nlr")
+script = ExtResource("1_cjqi6")
 
 [node name="texture" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_2rjqd")
@@ -768,32 +736,26 @@ position = Vector2(0, 3)
 shape = SubResource("CapsuleShape2D_4yulk")
 
 [node name="CharacterStateMachine" type="Node" parent="." node_paths=PackedStringArray("character", "current_state", "animationtree")]
-script = ExtResource("3_lx4st")
+script = ExtResource("3_gdrbn")
 character = NodePath("..")
 current_state = NodePath("Air")
 animationtree = NodePath("../AnimationTree")
 
 [node name="Ground" type="Node" parent="CharacterStateMachine"]
-script = ExtResource("4_mjau3")
+script = ExtResource("4_2rdhu")
 can_sprint = true
-can_push = true
 
-[node name="Air" type="Node" parent="CharacterStateMachine" node_paths=PackedStringArray("glide_checker")]
-script = ExtResource("5_7rymb")
-glide_checker = NodePath("../../glide_check")
+[node name="Air" type="Node" parent="CharacterStateMachine"]
+script = ExtResource("5_oth0i")
 can_move = false
 can_glide = true
 
 [node name="Landing" type="Node" parent="CharacterStateMachine"]
-script = ExtResource("6_t0alr")
+script = ExtResource("6_10o4v")
 can_glide = true
 
 [node name="Gliding" type="Node" parent="CharacterStateMachine"]
-script = ExtResource("7_3jy5b")
-
-[node name="Ability" type="Node" parent="CharacterStateMachine" node_paths=PackedStringArray("ability_cursor")]
-script = ExtResource("8_to81o")
-ability_cursor = NodePath("../../ability_cursor")
+script = ExtResource("7_3grmf")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 root_node = NodePath("../texture")
@@ -802,49 +764,17 @@ libraries = {
 }
 
 [node name="AnimationTree" type="AnimationTree" parent="."]
-active = false
 root_node = NodePath("../texture")
 libraries = {
 "": SubResource("AnimationLibrary_tv6d0")
 }
 tree_root = SubResource("AnimationNodeStateMachine_eedct")
 anim_player = NodePath("../AnimationPlayer")
-parameters/Ability/blend_position = Vector2(0, 0.093199)
 parameters/Air/blend_position = 0
 parameters/Glide/blend_position = 0
-parameters/Ground/blend_position = 0.997033
+parameters/Ground/blend_position = 0.0281899
 parameters/Land/blend_position = -0.0825826
 parameters/Sprinting/blend_position = 0
 
-[node name="glide_check" type="RayCast2D" parent="."]
-enabled = false
-target_position = Vector2(0, 49)
-
-[node name="ability_cursor" type="CenterContainer" parent="."]
-visible = false
-modulate = Color(1, 1, 1, 0.74902)
-z_index = 99
-z_as_relative = false
-offset_right = 40.0
-offset_bottom = 40.0
-use_top_left = true
-
-[node name="Sprite2D" type="Sprite2D" parent="ability_cursor"]
-texture = ExtResource("9_qlsvu")
-region_enabled = true
-region_rect = Rect2(327, 129, 12, 12)
-
-[node name="cursor_area" type="Area2D" parent="ability_cursor"]
-scale = Vector2(0.102859, 0.102859)
-monitoring = false
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="ability_cursor/cursor_area"]
-shape = SubResource("CircleShape2D_k5126")
-
-[node name="ability_ray" type="RayCast2D" parent="."]
-enabled = false
-
-[node name="GPUParticles2D" type="GPUParticles2D" parent="."]
-emitting = false
-process_material = SubResource("ParticleProcessMaterial_jkd5c")
-lifetime = 2.0
+[node name="RayCast2D" type="RayCast2D" parent="."]
+position = Vector2(0, 12)
