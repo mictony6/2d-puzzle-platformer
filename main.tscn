@@ -20,7 +20,7 @@ font_size = 10
 [node name="World" type="Node2D"]
 
 [node name="Player" parent="." instance=ExtResource("2_l56so")]
-position = Vector2(219, -116)
+position = Vector2(-242, -141)
 
 [node name="Control" type="Control" parent="Player"]
 layout_mode = 3
@@ -59,7 +59,6 @@ label_settings = ExtResource("3_jel06")
 [node name="Camera2D" type="Camera2D" parent="." node_paths=PackedStringArray("player")]
 position = Vector2(219, -83)
 zoom = Vector2(2, 2)
-position_smoothing_enabled = true
 position_smoothing_speed = 25.0
 script = ExtResource("3_spwda")
 player = NodePath("../Player")
