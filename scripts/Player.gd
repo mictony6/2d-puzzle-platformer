@@ -19,16 +19,31 @@ var default_position : Vector2
 #coyote time
 var coyote_time = 0.1
 
+#jump buffer
+var buffered_jump_time = 0.1
+var buffered_jump_timer = 0.0
+
 var launched : bool = false
 
 #sprint
 var is_sprinting : bool = false
+
+var glide_checker : RayCast2D 
+
+
+@onready var inner_right : RayCast2D = $ceiling_slide_rays/right_inner
+@onready var inner_left : RayCast2D = $ceiling_slide_rays/left_inner
+@onready var outer_right : RayCast2D = $ceiling_slide_rays/right_outer
+@onready var outer_left : RayCast2D = $ceiling_slide_rays/left_outer
+
+
 
 func _ready():
 	default_position =  position
 	state_machine = $CharacterStateMachine
 	ability_particles = $GPUParticles2D
 	ability_ray = $ability_ray
+	glide_checker = $glide_check
 
 
 func _process(delta):
@@ -66,6 +81,13 @@ func move_character(delta):
 	
 
 func jump():
+	if outer_left.is_colliding() and !inner_left.is_colliding() \
+		and !inner_right.is_colliding() and !outer_right.is_colliding():
+			position.x += 5
+	elif outer_right.is_colliding() and !inner_right.is_colliding() \
+		and !inner_left.is_colliding() and !outer_left.is_colliding():
+			position.x -= 5
+			
 	velocity.y = JUMP_VELOCITY 
 	state_machine.current_state.transition_to.emit("Air")
 	

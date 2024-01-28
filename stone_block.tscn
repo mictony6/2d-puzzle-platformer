@@ -1,18 +1,36 @@
-[gd_scene load_steps=5 format=3 uid="uid://di2doavn1a4vc"]
+[gd_scene load_steps=7 format=3 uid="uid://di2doavn1a4vc"]
 
-[ext_resource type="PackedScene" uid="uid://dvmpvsw3h2h81" path="res://block.tscn" id="1_5d05i"]
 [ext_resource type="Script" path="res://scripts/stone_block.gd" id="2_r8uyi"]
 [ext_resource type="Texture2D" uid="uid://cwvp7hxolbtme" path="res://assets/spritesheets/blocks/spritesheet_stone.png" id="3_64n4e"]
+[ext_resource type="PackedScene" uid="uid://6n4hjkl2me5c" path="res://components/pushable.tscn" id="3_ejdpu"]
+[ext_resource type="PackedScene" uid="uid://vfm8c4u7tah7" path="res://components/launchable.tscn" id="4_hwl8l"]
 
 [sub_resource type="PhysicsMaterial" id="PhysicsMaterial_6qmb6"]
 friction = 0.75
 rough = true
 bounce = 0.1
 
-[node name="StoneBlock" instance=ExtResource("1_5d05i")]
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_l28ee"]
+size = Vector2(34, 34)
+
+[node name="StoneBlock" type="RigidBody2D" groups=["Box"]]
+collision_layer = 2
+collision_mask = 3
 mass = 12.0
 physics_material_override = SubResource("PhysicsMaterial_6qmb6")
 script = ExtResource("2_r8uyi")
 
-[node name="Sprite2D" parent="." index="1"]
+[node name="Sprite2D" type="Sprite2D" parent="."]
+scale = Vector2(0.25, 0.25)
 texture = ExtResource("3_64n4e")
+region_enabled = true
+region_rect = Rect2(360, 360, 140, 140)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_l28ee")
+
+[node name="Pushable" parent="." node_paths=PackedStringArray("body") instance=ExtResource("3_ejdpu")]
+body = NodePath("..")
+
+[node name="Launchable" parent="." node_paths=PackedStringArray("body") instance=ExtResource("4_hwl8l")]
+body = NodePath("..")

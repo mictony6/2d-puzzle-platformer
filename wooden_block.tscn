@@ -1,14 +1,47 @@
-[gd_scene load_steps=4 format=3 uid="uid://chhdmtm5h44rx"]
+[gd_scene load_steps=9 format=3 uid="uid://chhdmtm5h44rx"]
 
-[ext_resource type="PackedScene" uid="uid://dvmpvsw3h2h81" path="res://block.tscn" id="1_fgru4"]
+[ext_resource type="Texture2D" uid="uid://cyuecjym8bfwp" path="res://assets/spritesheets/blocks/spritesheet_wood.png" id="2_pctfw"]
 [ext_resource type="Script" path="res://scripts/WoodenBlock.gd" id="2_rt05l"]
+[ext_resource type="PackedScene" uid="uid://6n4hjkl2me5c" path="res://components/pushable.tscn" id="3_0r53u"]
+[ext_resource type="PackedScene" uid="uid://vfm8c4u7tah7" path="res://components/launchable.tscn" id="4_fpu3v"]
+[ext_resource type="PackedScene" uid="uid://36vqaluyu1y" path="res://components/burnable.tscn" id="5_ikaus"]
 
 [sub_resource type="PhysicsMaterial" id="PhysicsMaterial_xlsc7"]
-friction = 0.5
+friction = 0.6
 rough = true
 bounce = 0.2
 
-[node name="WoodenBlock" instance=ExtResource("1_fgru4")]
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_l28ee"]
+size = Vector2(34, 34)
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_x6qmv"]
+radius = 28.0179
+
+[node name="WoodenBlock" type="RigidBody2D" groups=["Box"]]
+collision_layer = 6
+collision_mask = 3
 mass = 8.0
 physics_material_override = SubResource("PhysicsMaterial_xlsc7")
 script = ExtResource("2_rt05l")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+scale = Vector2(0.25, 0.25)
+texture = ExtResource("2_pctfw")
+region_enabled = true
+region_rect = Rect2(360, 360, 140, 140)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_l28ee")
+
+[node name="Pushable" parent="." node_paths=PackedStringArray("body") instance=ExtResource("3_0r53u")]
+body = NodePath("..")
+
+[node name="Launchable" parent="." node_paths=PackedStringArray("body") instance=ExtResource("4_fpu3v")]
+body = NodePath("..")
+
+[node name="Burnable" parent="." node_paths=PackedStringArray("body") instance=ExtResource("5_ikaus")]
+body = NodePath("..")
+burning = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Burnable"]
+shape = SubResource("CircleShape2D_x6qmv")

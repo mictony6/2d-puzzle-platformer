@@ -5,6 +5,7 @@ var local_jump_velocity : int = 0
 
 
 func on_enter():
+
 	character.launched = false
 	walk()
 	if (Input.is_action_pressed("sprint")):
@@ -13,6 +14,7 @@ func on_enter():
 
 	
 func state_input(event : InputEvent):
+
 	if (event.is_action_pressed("jump")):
 		character.jump()
 	if (event.is_action_pressed("sprint")):
@@ -28,7 +30,9 @@ func walk():
 	character.is_sprinting = false;
 	
 func update(delta):
-
+	if character.buffered_jump_timer > 0:
+		character.jump()
+		return
 	tree.set("parameters/Ground/blend_position", character.direction)
 	tree.set("parameters/Sprinting/blend_position", character.direction)
 	

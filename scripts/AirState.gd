@@ -4,10 +4,12 @@ class_name AirState
 var jump_x = 0
 var sprint_jump : bool = false
 
-@export var glide_checker : RayCast2D
 
 func on_enter():
-	glide_checker.enabled = true
+	#for child in ceiling_slide_rays.get_children():
+		#child.enabled = true
+	character.buffered_jump_timer = 0
+	character.glide_checker.enabled = true
 	if character.is_sprinting:
 		sprint_jump =  true
 	else:
@@ -22,8 +24,10 @@ func on_enter():
 		sprint_jump = true
 		
 func update(delta):
-	if glide_checker.enabled:
-		can_glide = !glide_checker.is_colliding()
+	if Input.is_action_just_pressed("jump"):
+		character.buffered_jump_timer = character.buffered_jump_time
+	if character.glide_checker.enabled:
+		can_glide = !character.glide_checker.is_colliding()
 	if character.direction:
 		tree.set("parameters/Air/blend_position", character.direction)
 	
@@ -43,6 +47,8 @@ func update(delta):
 			return
 		
 func on_exit():
+	#for child in ceiling_slide_rays.get_children():
+		#child.enabled = false
 	character.coyote_time = 0
-	glide_checker.enabled = false
+	character.glide_checker.enabled = false
 

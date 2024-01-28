@@ -1,0 +1,36 @@
+[gd_scene load_steps=6 format=3 uid="uid://36vqaluyu1y"]
+
+[ext_resource type="Script" path="res://scripts/script_components/Burnable.gd" id="1_8m3tp"]
+
+[sub_resource type="Curve" id="Curve_6b1ah"]
+_data = [Vector2(0, 0.857143), 0.0, 2.55918, 0, 0, Vector2(0.492823, 1), 0.0, 0.0, 0, 0, Vector2(1, 0.263736), 0.0, 0.0, 0, 0]
+point_count = 3
+
+[sub_resource type="CurveTexture" id="CurveTexture_6vvlp"]
+curve = SubResource("Curve_6b1ah")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_efxak"]
+particle_flag_disable_z = true
+emission_shape = 2
+emission_sphere_radius = 16.0
+direction = Vector3(0, -1, 0)
+initial_velocity_max = 10.0
+gravity = Vector3(0, -98, 0)
+linear_accel_max = 100.0
+radial_accel_min = -16.0
+radial_accel_max = 16.0
+scale_curve = SubResource("CurveTexture_6vvlp")
+
+[sub_resource type="PlaceholderTexture2D" id="PlaceholderTexture2D_17bea"]
+size = Vector2(8, 8)
+
+[node name="Burnable" type="Area2D"]
+collision_layer = 4
+collision_mask = 12
+script = ExtResource("1_8m3tp")
+
+[node name="GPUParticles2D" type="GPUParticles2D" parent="."]
+self_modulate = Color(1, 0.0784314, 0.0784314, 0.670588)
+process_material = SubResource("ParticleProcessMaterial_efxak")
+texture = SubResource("PlaceholderTexture2D_17bea")
+lifetime = 0.5

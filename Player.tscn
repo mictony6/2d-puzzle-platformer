@@ -738,17 +738,21 @@ radius = 48.6102
 
 [sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_jkd5c"]
 lifetime_randomness = 0.25
+particle_flag_align_y = true
 particle_flag_disable_z = true
 emission_shape = 2
-emission_sphere_radius = 40.0
+emission_sphere_radius = 35.0
 inherit_velocity_ratio = 0.25
 orbit_velocity_min = -0.25
 orbit_velocity_max = 0.25
 radial_velocity_min = -10.0
 radial_velocity_max = 10.0
 scale_max = 2.0
+hue_variation_min = -0.2
+hue_variation_max = 0.19
 
 [node name="Player" type="CharacterBody2D"]
+collision_mask = 3
 script = ExtResource("1_v3nlr")
 
 [node name="texture" type="AnimatedSprite2D" parent="."]
@@ -778,9 +782,8 @@ script = ExtResource("4_mjau3")
 can_sprint = true
 can_push = true
 
-[node name="Air" type="Node" parent="CharacterStateMachine" node_paths=PackedStringArray("glide_checker")]
+[node name="Air" type="Node" parent="CharacterStateMachine"]
 script = ExtResource("5_7rymb")
-glide_checker = NodePath("../../glide_check")
 can_move = false
 can_glide = true
 
@@ -818,7 +821,7 @@ parameters/Sprinting/blend_position = 0
 
 [node name="glide_check" type="RayCast2D" parent="."]
 enabled = false
-target_position = Vector2(0, 49)
+target_position = Vector2(0, 60)
 
 [node name="ability_cursor" type="CenterContainer" parent="."]
 visible = false
@@ -836,6 +839,7 @@ region_rect = Rect2(327, 129, 12, 12)
 
 [node name="cursor_area" type="Area2D" parent="ability_cursor"]
 scale = Vector2(0.102859, 0.102859)
+collision_mask = 2
 monitoring = false
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="ability_cursor/cursor_area"]
@@ -846,5 +850,24 @@ enabled = false
 
 [node name="GPUParticles2D" type="GPUParticles2D" parent="."]
 emitting = false
+amount = 16
 process_material = SubResource("ParticleProcessMaterial_jkd5c")
 lifetime = 2.0
+
+[node name="ceiling_slide_rays" type="Node2D" parent="."]
+
+[node name="right_inner" type="RayCast2D" parent="ceiling_slide_rays"]
+position = Vector2(2, 0)
+target_position = Vector2(0, -25)
+
+[node name="right_outer" type="RayCast2D" parent="ceiling_slide_rays"]
+position = Vector2(10, 0)
+target_position = Vector2(0, -25)
+
+[node name="left_inner" type="RayCast2D" parent="ceiling_slide_rays"]
+position = Vector2(-2, 0)
+target_position = Vector2(0, -25)
+
+[node name="left_outer" type="RayCast2D" parent="ceiling_slide_rays"]
+position = Vector2(-10, 0)
+target_position = Vector2(0, -25)

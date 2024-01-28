@@ -35,6 +35,7 @@ func check_can_sprint():
 func update_state_machine(delta):
 	
 	check_push(delta)
+	character.buffered_jump_timer -= delta
 	current_state.update(delta)
 
 	if (current_state.next_state != null):
@@ -55,13 +56,12 @@ func _on_state_transition(new_state):
 
 func check_push(delta):
 	if (current_state.can_push):
-		var character = current_state.character
 		for i in range(character.get_slide_collision_count()):
 			var collision : KinematicCollision2D = character.get_slide_collision(i)
 			var collider = collision.get_collider()
-			if collider.is_in_group("Box"):
+			if collider.is_in_group("Pushable"):
 				var normal = -collision.get_normal()
 				if (normal.y <= 0.1):
-					collider.push(normal.normalized() * 10000 * delta)
+					collider.get_node("Pushable").push(normal.normalized() * 10000 * delta)
 					
 

@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://vfm8c4u7tah7"]
+
+[ext_resource type="Script" path="res://scripts/script_components/Launchable.gd" id="1_jvaed"]
+
+[node name="Launchable" type="Node2D"]
+script = ExtResource("1_jvaed")

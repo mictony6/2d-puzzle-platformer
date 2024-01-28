@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://c2lkldmkrvoyp"
-path="res://.godot/imported/spritesheet_glass.png-7b2ba8715dbb2900e028389572ce663d.ctex"
+uid="uid://oh4ffgprwqer"
+path="res://.godot/imported/spritesheet_metal.png-df8809767f74918a0b058c53250a661a.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://scripts/spritesheet_glass.png"
-dest_files=["res://.godot/imported/spritesheet_glass.png-7b2ba8715dbb2900e028389572ce663d.ctex"]
+source_file="res://assets/spritesheets/blocks/spritesheet_metal.png"
+dest_files=["res://.godot/imported/spritesheet_metal.png-df8809767f74918a0b058c53250a661a.ctex"]
 
 [params]
 
