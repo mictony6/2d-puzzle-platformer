@@ -44,7 +44,7 @@ func _physics_process(delta):
 				'direction': launch_direction
 			}
 			body.get_node("Launchable").launch(launch_details)
-		#bodies_on_contact.clear()
+		bodies_on_contact.clear()
 		if player_on_contact != null:
 			player_on_contact.get_launched(launch_direction)
 			player_on_contact = null

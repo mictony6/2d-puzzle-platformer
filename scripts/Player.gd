@@ -46,23 +46,23 @@ func _ready():
 	glide_checker = $glide_check
 
 
-func _process(delta):
-	pass
-
-func _physics_process(delta):
-
+func _process(delta):	
 	# Get the input direction and handle the movement/deceleration.
 	direction = Input.get_axis("left", "right")
 	
+	
+	
+
+func _physics_process(delta):
 	move_character(delta)
-	
-	
 	state_machine.update_state_machine(delta)
 
+
+
 	
-	# reset for debugging
-	if position.y > 500:
-		position.y = default_position.y
+	## reset for debugging
+	#if position.y > 500:
+		#position.y = default_position.y
 		
 	#terminal velocity
 	velocity.y = clampf(velocity.y, -640.0, 320.0)
