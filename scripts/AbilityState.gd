@@ -25,9 +25,6 @@ func _ready():
 	cursor_area.body_entered.connect(on_body_entered)
 	cursor_area.body_exited.connect(on_body_exited)
 	
-	
-	
-
 func on_enter():
 	character.ability_particles.emitting  = true
 	reset_cursor_position()
@@ -47,6 +44,8 @@ func on_exit():
 		selected_rigidbody.angular_damp = 0
 		selected_rigidbody.linear_damp = 0
 		selected_rigidbody.gravity_scale = 1.0
+
+
 	
 	selected_rigidbody = null
 	controlling =false
@@ -65,8 +64,6 @@ func state_input(event: InputEvent):
 	if (event.is_action_pressed("jump")):
 		jump()
 	
-		
-		
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func update(delta):

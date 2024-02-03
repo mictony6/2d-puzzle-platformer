@@ -36,7 +36,8 @@ func on_body_in_view(body):
 			#inserted =true
 	#if !inserted:
 		#fo_in_view.push_back(body)
-	fo_in_view.push_back(body)
+	if body.get_node("CameraFocusable").focused:
+		fo_in_view.push_back(body)
 	
 func on_body_exited_view(body):
 	if fo_in_view.has(body):

@@ -2,7 +2,7 @@ extends CharacterBody2D
 class_name Player
 
 
-
+const mass = 40
 const SPEED = 100.0
 const JUMP_VELOCITY = -250.0
 const FRICTION = 0.01

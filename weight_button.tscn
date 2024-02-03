@@ -1,0 +1,57 @@
+[gd_scene load_steps=8 format=3 uid="uid://c5ndro6t2crfu"]
+
+[ext_resource type="Script" path="res://scripts/weight_button.gd" id="1_gefp3"]
+[ext_resource type="Texture2D" uid="uid://cmjvvgg8imu58" path="res://assets/button_partA.png" id="1_m7m6p"]
+[ext_resource type="Texture2D" uid="uid://df3l7745x6mhv" path="res://assets/button_partB.png" id="2_ykuo5"]
+
+[sub_resource type="PhysicsMaterial" id="PhysicsMaterial_kdhbd"]
+rough = true
+absorbent = true
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_feto0"]
+size = Vector2(14, 8)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_u6rk5"]
+size = Vector2(16, 11)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_xml6l"]
+size = Vector2(12, 5)
+
+[node name="WeightButton" type="Node2D" node_paths=PackedStringArray("top")]
+script = ExtResource("1_gefp3")
+top = NodePath("Top")
+
+[node name="Top" type="AnimatableBody2D" parent="."]
+position = Vector2(0, -2)
+collision_mask = 0
+physics_material_override = SubResource("PhysicsMaterial_kdhbd")
+sync_to_physics = false
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="Top"]
+position = Vector2(0, -1)
+shape = SubResource("RectangleShape2D_feto0")
+
+[node name="ButtonPartA" type="Sprite2D" parent="Top"]
+z_index = -2
+z_as_relative = false
+texture = ExtResource("1_m7m6p")
+
+[node name="Bottom" type="StaticBody2D" parent="."]
+
+[node name="ButtonPartB" type="Sprite2D" parent="Bottom"]
+texture = ExtResource("2_ykuo5")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Bottom"]
+position = Vector2(0, 2.5)
+shape = SubResource("RectangleShape2D_u6rk5")
+
+[node name="SignalEmitter" type="Node2D" parent="."]
+
+[node name="Area2D" type="Area2D" parent="."]
+position = Vector2(0, -6)
+collision_layer = 0
+collision_mask = 3
+
+[node name="CollisionShape2D3" type="CollisionShape2D" parent="Area2D"]
+position = Vector2(0, 0.5)
+shape = SubResource("RectangleShape2D_xml6l")

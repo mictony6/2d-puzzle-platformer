@@ -13,7 +13,7 @@
 [ext_resource type="PackedScene" uid="uid://8gjhoyngsfwg" path="res://metal_block.tscn" id="10_hku7v"]
 [ext_resource type="PackedScene" uid="uid://rd5kn1oi3ria" path="res://left_launcher.tscn" id="11_xfhnf"]
 [ext_resource type="PackedScene" uid="uid://b4eapjrajv1m3" path="res://diagonal_left_launcher.tscn" id="12_hpxc3"]
-[ext_resource type="PackedScene" uid="uid://bfsn7ro4gfq5o" path="res://components/camera_focusable.tscn" id="12_qa61a"]
+[ext_resource type="PackedScene" uid="uid://c5ndro6t2crfu" path="res://weight_button.tscn" id="14_hbhqy"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_d4jrf"]
 font_size = 10
@@ -105,14 +105,8 @@ position = Vector2(257, -55)
 [node name="WoodenBlock" parent="." instance=ExtResource("6_hqwsc")]
 position = Vector2(-136, -63)
 
-[node name="CameraFocusable" parent="WoodenBlock" instance=ExtResource("12_qa61a")]
-focused = false
-
 [node name="WoodenBlock3" parent="." instance=ExtResource("6_hqwsc")]
 position = Vector2(82, -89)
-
-[node name="CameraFocusable" parent="WoodenBlock3" instance=ExtResource("12_qa61a")]
-focused = false
 
 [node name="MetalBlock" parent="." instance=ExtResource("10_hku7v")]
 position = Vector2(77, 4)
@@ -121,9 +115,15 @@ position = Vector2(77, 4)
 position = Vector2(179, 15)
 
 [node name="WoodenBlock2" parent="." instance=ExtResource("6_hqwsc")]
-position = Vector2(254, 12)
+position = Vector2(-45, -117)
 
 [node name="Burnable" parent="WoodenBlock2" index="4"]
-burning = false
+burning = true
+
+[node name="CameraFocusable" parent="WoodenBlock2" index="6"]
+position = Vector2(0, 3)
+
+[node name="WeightButton" parent="." instance=ExtResource("14_hbhqy")]
+position = Vector2(-140, 41)
 
 [editable path="WoodenBlock2"]

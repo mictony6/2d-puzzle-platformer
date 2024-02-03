@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=3 uid="uid://dx16bhwvqkjtc"]
+[gd_scene load_steps=10 format=3 uid="uid://dx16bhwvqkjtc"]
 
 [ext_resource type="Script" path="res://scripts/IceBlock.gd" id="2_ysnrf"]
 [ext_resource type="Texture2D" uid="uid://dvl4sjqpvx02c" path="res://assets/spritesheets/blocks/spritesheet_glass.png" id="3_82lph"]
@@ -6,6 +6,7 @@
 [ext_resource type="PackedScene" uid="uid://vfm8c4u7tah7" path="res://components/launchable.tscn" id="4_e45gu"]
 [ext_resource type="PackedScene" uid="uid://dx2rq42wwfsyi" path="res://components/meltable.tscn" id="5_yhpvu"]
 [ext_resource type="Script" path="res://scripts/script_components/Movable.gd" id="6_4jx5g"]
+[ext_resource type="Script" path="res://scripts/script_components/CameraFocusable.gd" id="7_p6nc2"]
 
 [sub_resource type="PhysicsMaterial" id="PhysicsMaterial_7ompg"]
 friction = 0.25
@@ -43,3 +44,6 @@ collider = NodePath("../CollisionShape2D")
 
 [node name="Movable" type="Node2D" parent="."]
 script = ExtResource("6_4jx5g")
+
+[node name="CameraFocusable" type="Node2D" parent="."]
+script = ExtResource("7_p6nc2")

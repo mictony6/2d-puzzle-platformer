@@ -48,6 +48,6 @@ func _physics_process(delta):
 		if player_on_contact != null:
 			player_on_contact.get_launched(launch_direction)
 			player_on_contact = null
-		down()
+		# down()
 
 

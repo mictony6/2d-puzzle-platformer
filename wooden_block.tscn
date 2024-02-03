@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=3 uid="uid://chhdmtm5h44rx"]
+[gd_scene load_steps=11 format=3 uid="uid://chhdmtm5h44rx"]
 
 [ext_resource type="Texture2D" uid="uid://cyuecjym8bfwp" path="res://assets/spritesheets/blocks/spritesheet_wood.png" id="2_pctfw"]
 [ext_resource type="Script" path="res://scripts/WoodenBlock.gd" id="2_rt05l"]
@@ -6,6 +6,7 @@
 [ext_resource type="PackedScene" uid="uid://vfm8c4u7tah7" path="res://components/launchable.tscn" id="4_fpu3v"]
 [ext_resource type="PackedScene" uid="uid://36vqaluyu1y" path="res://components/burnable.tscn" id="5_ikaus"]
 [ext_resource type="PackedScene" uid="uid://b8xfcmgf8rnds" path="res://components/movable.tscn" id="6_k7ew0"]
+[ext_resource type="Script" path="res://scripts/script_components/CameraFocusable.gd" id="7_l4lcm"]
 
 [sub_resource type="PhysicsMaterial" id="PhysicsMaterial_xlsc7"]
 friction = 0.6
@@ -42,9 +43,11 @@ body = NodePath("..")
 
 [node name="Burnable" parent="." node_paths=PackedStringArray("body") instance=ExtResource("5_ikaus")]
 body = NodePath("..")
-burning = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Burnable"]
 shape = SubResource("CircleShape2D_x6qmv")
 
 [node name="Movable" parent="." instance=ExtResource("6_k7ew0")]
+
+[node name="CameraFocusable" type="Node2D" parent="."]
+script = ExtResource("7_l4lcm")

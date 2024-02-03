@@ -12,38 +12,40 @@ size = Vector2(18, 111)
 [node name="CharacterBody2D" parent="." index="0"]
 script = ExtResource("2_gd5vl")
 
-[node name="Sprite2D2" type="Sprite2D" parent="CharacterBody2D" index="3"]
+[node name="walls" type="StaticBody2D" parent="." index="1"]
+
+[node name="Sprite2D2" type="Sprite2D" parent="walls" index="0"]
 position = Vector2(-29.25, 17.625)
 scale = Vector2(0.25, 0.25)
 texture = ExtResource("2_6a3v7")
 region_enabled = true
 region_rect = Rect2(640, -1, 70, 221)
 
-[node name="Sprite2D3" type="Sprite2D" parent="CharacterBody2D" index="4"]
+[node name="Sprite2D3" type="Sprite2D" parent="walls" index="1"]
 position = Vector2(29.75, 17.625)
 scale = Vector2(0.25, 0.25)
 texture = ExtResource("2_6a3v7")
 region_enabled = true
 region_rect = Rect2(640, -1, 70, 221)
 
-[node name="Sprite2D4" type="Sprite2D" parent="CharacterBody2D" index="5"]
+[node name="Sprite2D4" type="Sprite2D" parent="walls" index="2"]
 position = Vector2(-29.25, 72.625)
 scale = Vector2(0.25, 0.25)
 texture = ExtResource("2_6a3v7")
 region_enabled = true
 region_rect = Rect2(640, -1, 70, 221)
 
-[node name="Sprite2D5" type="Sprite2D" parent="CharacterBody2D" index="6"]
+[node name="Sprite2D5" type="Sprite2D" parent="walls" index="3"]
 position = Vector2(29.75, 72.625)
 scale = Vector2(0.25, 0.25)
 texture = ExtResource("2_6a3v7")
 region_enabled = true
 region_rect = Rect2(640, -1, 70, 221)
 
-[node name="CollisionShape2D3" type="CollisionShape2D" parent="CharacterBody2D" index="7"]
+[node name="CollisionShape2D3" type="CollisionShape2D" parent="walls" index="4"]
 position = Vector2(29.75, 45.5)
 shape = SubResource("RectangleShape2D_dow23")
 
-[node name="CollisionShape2D4" type="CollisionShape2D" parent="CharacterBody2D" index="8"]
+[node name="CollisionShape2D4" type="CollisionShape2D" parent="walls" index="5"]
 position = Vector2(-29.25, 45.5)
 shape = SubResource("RectangleShape2D_dow23")

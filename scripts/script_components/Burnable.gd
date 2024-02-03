@@ -44,6 +44,10 @@ func on_burnable_body_exited(body):
 	if body.is_in_group("Meltable") and burning:
 		var meltable_component : Meltable = body.get_node("Meltable")
 		meltable_component.melt(-self.temperature)
+	elif body.is_in_group("Burnable"):
+		var burnable_component : Burnable = body.get_node("Burnable")
+		if burnable_component.burn_timer > 0 :
+			burnable_component.put_out()
 
 
 func _process(delta):

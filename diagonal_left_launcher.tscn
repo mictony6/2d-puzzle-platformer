@@ -13,20 +13,22 @@ rotation = -0.785398
 [node name="CharacterBody2D" parent="." index="0"]
 script = ExtResource("2_smxv1")
 
-[node name="Sprite2D3" type="Sprite2D" parent="CharacterBody2D" index="3"]
-position = Vector2(-26.25, -15.375)
+[node name="StaticBody2D" type="StaticBody2D" parent="." index="1"]
+
+[node name="Sprite2D3" type="Sprite2D" parent="StaticBody2D" index="0"]
+position = Vector2(-26.25, -41.375)
 scale = Vector2(0.25, 0.25)
 texture = ExtResource("3_1rlkw")
 region_enabled = true
 region_rect = Rect2(640, -1, 70, 221)
 
-[node name="Sprite2D5" type="Sprite2D" parent="CharacterBody2D" index="4"]
-position = Vector2(-26.25, 39.625)
+[node name="Sprite2D5" type="Sprite2D" parent="StaticBody2D" index="1"]
+position = Vector2(-26.25, 13.625)
 scale = Vector2(0.25, 0.25)
 texture = ExtResource("3_1rlkw")
 region_enabled = true
 region_rect = Rect2(640, -1, 70, 221)
 
-[node name="CollisionShape2D3" type="CollisionShape2D" parent="CharacterBody2D" index="5"]
-position = Vector2(-26.25, 12.5)
+[node name="CollisionShape2D3" type="CollisionShape2D" parent="StaticBody2D" index="2"]
+position = Vector2(-26.25, -13.5)
 shape = SubResource("RectangleShape2D_x50s0")

@@ -14,23 +14,27 @@ size = Vector2(18, 111)
 rotation = 1.5708
 
 [node name="CharacterBody2D" parent="." index="0"]
+position = Vector2(0, 26)
 physics_material_override = SubResource("PhysicsMaterial_32hcs")
 script = ExtResource("2_mvkth")
 
-[node name="Sprite2D3" type="Sprite2D" parent="CharacterBody2D" index="3"]
+[node name="StaticBody2D" type="StaticBody2D" parent="." index="1"]
+position = Vector2(-1.81e-05, -5)
+
+[node name="Sprite2D3" type="Sprite2D" parent="StaticBody2D" index="0"]
 position = Vector2(26.75, -12.625)
 scale = Vector2(0.25, 0.25)
 texture = ExtResource("3_4jcli")
 region_enabled = true
 region_rect = Rect2(640, -1, 70, 221)
 
-[node name="Sprite2D5" type="Sprite2D" parent="CharacterBody2D" index="4"]
+[node name="Sprite2D5" type="Sprite2D" parent="StaticBody2D" index="1"]
 position = Vector2(26.75, 42.375)
 scale = Vector2(0.25, 0.25)
 texture = ExtResource("3_4jcli")
 region_enabled = true
 region_rect = Rect2(640, -1, 70, 221)
 
-[node name="CollisionShape2D3" type="CollisionShape2D" parent="CharacterBody2D" index="5"]
+[node name="CollisionShape2D3" type="CollisionShape2D" parent="StaticBody2D" index="2"]
 position = Vector2(26.75, 15.25)
 shape = SubResource("RectangleShape2D_ropeq")

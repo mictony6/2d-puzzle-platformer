@@ -1,6 +1,7 @@
 [gd_scene load_steps=6 format=3 uid="uid://36vqaluyu1y"]
 
 [ext_resource type="Script" path="res://scripts/script_components/Burnable.gd" id="1_8m3tp"]
+[ext_resource type="Texture2D" uid="uid://i0llcd276flh" path="res://assets/fire.png" id="2_5vka7"]
 
 [sub_resource type="Curve" id="Curve_6b1ah"]
 _data = [Vector2(0, 0.857143), 0.0, 2.55918, 0, 0, Vector2(0.492823, 1), 0.0, 0.0, 0, 0, Vector2(1, 0.263736), 0.0, 0.0, 0, 0]
@@ -19,10 +20,9 @@ gravity = Vector3(0, -98, 0)
 linear_accel_max = 100.0
 radial_accel_min = -16.0
 radial_accel_max = 16.0
+scale_min = 0.5
+scale_max = 0.75
 scale_curve = SubResource("CurveTexture_6vvlp")
-
-[sub_resource type="PlaceholderTexture2D" id="PlaceholderTexture2D_17bea"]
-size = Vector2(8, 8)
 
 [node name="Burnable" type="Area2D"]
 collision_layer = 4
@@ -30,7 +30,7 @@ collision_mask = 12
 script = ExtResource("1_8m3tp")
 
 [node name="GPUParticles2D" type="GPUParticles2D" parent="."]
-self_modulate = Color(1, 0.0784314, 0.0784314, 0.670588)
+self_modulate = Color(1, 0.431373, 0.431373, 0.831373)
 process_material = SubResource("ParticleProcessMaterial_efxak")
-texture = SubResource("PlaceholderTexture2D_17bea")
+texture = ExtResource("2_5vka7")
 lifetime = 0.5
