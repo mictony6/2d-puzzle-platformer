@@ -16,11 +16,12 @@ func _ready():
 
 
 func melt(temperature: float):
-	current_temperature = temperature
-	if temperature >= melting_threshold:
-		melting = true
+	if !melting:
+		current_temperature = temperature
 	else:
-		melting = false
+		current_temperature += temperature*0.5
+	print(current_temperature)
+	melting =  temperature >= melting_threshold
 	
 func _process(delta):
 	if melting:

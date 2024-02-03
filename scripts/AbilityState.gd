@@ -17,6 +17,7 @@ var bodies_selected = []
 var controlling : bool = false
 
 
+var direction : Vector2
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -55,14 +56,16 @@ func reset_cursor_position():
 	if character:
 		ability_cursor.global_position = character.global_position
 
-func state_input(event):
+func state_input(event: InputEvent):
 	if Input.is_action_just_pressed("ability"):
 		if !controlling:
 			select()
-	if Input.is_action_pressed("sprint"):
+	if event.is_action_pressed("sprint"):
 			transition_to.emit("Ground")
 	if (event.is_action_pressed("jump")):
 		jump()
+	
+		
 		
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
@@ -71,8 +74,9 @@ func update(delta):
 	if !character.is_on_floor():
 		transition_to.emit("Landing")
 		return
-		
-	var direction = Input.get_vector("r_left", "r_right", "r_up", "r_down")
+	
+	direction = Input.get_vector("r_left", "r_right", "r_up", "r_down")
+	
 	
 	if selected_rigidbody:
 		move_selected_body(direction, delta)
@@ -90,7 +94,6 @@ func move_cursor(direction, delta):
 
 	# Calculate the new position based on the cursor speed and elapsed time
 	var new_position : Vector2 = ability_cursor.position + direction * cursor_speed * delta
-	
 	var distance_to_player_squared = new_position.length_squared()
 	if distance_to_player_squared > max_cursor_distance_squared:
 
@@ -100,14 +103,15 @@ func move_cursor(direction, delta):
 		new_position = new_position.normalized() * min_cursor_distance		
 	ability_cursor.position = new_position
 	character.ability_ray.target_position = ability_cursor.position
-	#character.ability_particles.position = ability_cursor.position	
-	# Check for obstruction and update modulate color
+
+	# Check for obstruction and modulate green if can be reached otherwise red
 	if bodies_selected.size() > 0:
-		var ok_collision = (character.ability_ray.is_colliding() and character.ability_ray.get_collider() == bodies_selected[0])
+		var body_on_cursor = bodies_selected[0]
+		var ok_collision = (character.ability_ray.is_colliding() and character.ability_ray.get_collider() == body_on_cursor)
 		if !character.ability_ray.is_colliding() or ok_collision :
-			bodies_selected[0].modulate = Color.GREEN
+			body_on_cursor.modulate = Color.GREEN
 		else:
-			bodies_selected[0].modulate = Color.RED
+			body_on_cursor.modulate = Color.RED
 	
 	
 
@@ -132,30 +136,21 @@ func select():
 		cursor_area.monitoring = false
 
 func move_selected_body(direction, delta):
-	#if selected_rigidbody.get_colliding_bodies().has(character):
-		#transition_to.emit('Ground')
-		#return
+
+	# cancel if its pushing player up
 	for i in range(character.get_slide_collision_count()):
 		var collision =  character.get_slide_collision(i)
 		if collision.get_collider() == selected_rigidbody and collision.get_normal().y < 0:
 			transition_to.emit("Ground")
 			return
-	var movement_vector = direction *  cursor_speed * delta
-	movement_vector.x *= character.direction 
-	var force = direction * force_multiplier
-	
-	var body_position = selected_rigidbody.position
-	var distance_to_player = (body_position-character.position).length_squared()
-	#if distance_to_player > max_cursor_distance_squared || distance_to_player < min_cursor_distance_squared:
-		#transition_to.emit("Ground")
-		#return
-	if selected_rigidbody.linear_velocity.length()  < 200.0 :
-		selected_rigidbody.apply_central_impulse(force)
+
+	var movable_component :Movable = selected_rigidbody.get_node("Movable")
+	movable_component.move(direction, force_multiplier, 200.0, delta)
 	character.ability_particles.global_position = character.ability_particles.global_position.lerp(selected_rigidbody.global_position, delta*5) 
 	
 
 func on_body_entered(body):
-	if body is RigidBody2D :
+	if body.is_in_group("Movable") :
 		#if bodies_selected.size() == 0:
 			#body.modulate = Color.GREEN
 		#else: 

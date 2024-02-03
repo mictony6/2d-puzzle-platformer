@@ -62,6 +62,6 @@ func check_push(delta):
 			if collider.is_in_group("Pushable"):
 				var normal = -collision.get_normal()
 				if (normal.y <= 0.1):
-					collider.get_node("Pushable").push(normal.normalized() * 10000 * delta)
+					collider.get_node("Pushable").push(normal.normalized() * 7500 * delta)
 					
 

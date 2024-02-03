@@ -1,9 +1,10 @@
-[gd_scene load_steps=7 format=3 uid="uid://di2doavn1a4vc"]
+[gd_scene load_steps=8 format=3 uid="uid://di2doavn1a4vc"]
 
 [ext_resource type="Script" path="res://scripts/stone_block.gd" id="2_r8uyi"]
 [ext_resource type="Texture2D" uid="uid://cwvp7hxolbtme" path="res://assets/spritesheets/blocks/spritesheet_stone.png" id="3_64n4e"]
 [ext_resource type="PackedScene" uid="uid://6n4hjkl2me5c" path="res://components/pushable.tscn" id="3_ejdpu"]
 [ext_resource type="PackedScene" uid="uid://vfm8c4u7tah7" path="res://components/launchable.tscn" id="4_hwl8l"]
+[ext_resource type="Script" path="res://scripts/script_components/Movable.gd" id="5_8tobr"]
 
 [sub_resource type="PhysicsMaterial" id="PhysicsMaterial_6qmb6"]
 friction = 0.75
@@ -34,3 +35,6 @@ body = NodePath("..")
 
 [node name="Launchable" parent="." node_paths=PackedStringArray("body") instance=ExtResource("4_hwl8l")]
 body = NodePath("..")
+
+[node name="Movable" type="Node2D" parent="."]
+script = ExtResource("5_8tobr")

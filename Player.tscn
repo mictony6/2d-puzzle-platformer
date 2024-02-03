@@ -822,6 +822,7 @@ parameters/Sprinting/blend_position = 0
 [node name="glide_check" type="RayCast2D" parent="."]
 enabled = false
 target_position = Vector2(0, 60)
+collision_mask = 19
 
 [node name="ability_cursor" type="CenterContainer" parent="."]
 visible = false
@@ -839,6 +840,7 @@ region_rect = Rect2(327, 129, 12, 12)
 
 [node name="cursor_area" type="Area2D" parent="ability_cursor"]
 scale = Vector2(0.102859, 0.102859)
+collision_layer = 0
 collision_mask = 2
 monitoring = false
 
@@ -847,6 +849,7 @@ shape = SubResource("CircleShape2D_k5126")
 
 [node name="ability_ray" type="RayCast2D" parent="."]
 enabled = false
+collision_mask = 19
 
 [node name="GPUParticles2D" type="GPUParticles2D" parent="."]
 emitting = false

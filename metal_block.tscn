@@ -1,9 +1,10 @@
-[gd_scene load_steps=7 format=3 uid="uid://8gjhoyngsfwg"]
+[gd_scene load_steps=8 format=3 uid="uid://8gjhoyngsfwg"]
 
 [ext_resource type="Script" path="res://scripts/MetalBlock.gd" id="2_8tish"]
 [ext_resource type="PackedScene" uid="uid://6n4hjkl2me5c" path="res://components/pushable.tscn" id="3_286uo"]
 [ext_resource type="Texture2D" uid="uid://oh4ffgprwqer" path="res://assets/spritesheets/blocks/spritesheet_metal.png" id="3_eokh3"]
 [ext_resource type="PackedScene" uid="uid://vfm8c4u7tah7" path="res://components/launchable.tscn" id="4_buq2v"]
+[ext_resource type="Script" path="res://scripts/script_components/Movable.gd" id="5_6v6rj"]
 
 [sub_resource type="PhysicsMaterial" id="PhysicsMaterial_ctjdg"]
 friction = 0.75
@@ -33,3 +34,6 @@ body = NodePath("..")
 
 [node name="Launchable" parent="." node_paths=PackedStringArray("body") instance=ExtResource("4_buq2v")]
 body = NodePath("..")
+
+[node name="Movable" type="Node2D" parent="."]
+script = ExtResource("5_6v6rj")
